@@ -6,6 +6,12 @@ matplotlib.use('TkAgg')
 def create_histogram(data: list[int], title: str, output_image_location: str) -> None:
     """ Generate histogram that shows strings of bits """
 
+    # Set theme on histogram
+    sns.set_theme(style="darkgrid")
+
+    # Create new figure and axis
+    fig, ax = plt.subplots(figsize=(16, 9))
+
     # Setup variables
     current_bit = data[0]
     current_count = 1
@@ -27,14 +33,22 @@ def create_histogram(data: list[int], title: str, output_image_location: str) ->
     y = [count[1] for count in counts]
     labels = [f"{count[0]}" for count in counts]
 
-    # Set theme on histogram
-    sns.set_theme(style="darkgrid")
-
     # Setup histogrm
-    plt.bar(x, y)
-    plt.title(title)
-    plt.xlabel('String index')
-    plt.ylabel('String length')
-    plt.xticks(x, labels)
-    plt.yticks(range(min(y), max(y) + 1))
+    ax.bar(x, y)
+    ax.set_title(title)
+    ax.set_xlabel('String index')
+    ax.set_ylabel('String length')
+    ax.set_xticks(x)
+    ax.set_xticklabels(labels)
+    ax.set_yticks(range(min(y), max(y) + 1))
     plt.savefig(output_image_location)
+    plt.close(fig)
+
+
+def load_signal_from_file(file_location: str) -> list[int]:
+    """ Load string signal from file and convert it to list of bits """
+
+    with open(file_location, 'r') as file:
+        signal_string = file.readline()
+        signal_converted = [int(bit) for bit in signal_string]
+        return signal_converted

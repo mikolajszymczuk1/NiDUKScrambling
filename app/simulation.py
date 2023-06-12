@@ -15,7 +15,7 @@ def main():
 
     # Prepare simulation
     env = Environment()
-    transmitter = Transmitter(env, SIGNAL, 16)
+    transmitter = Transmitter(env, SIGNAL, 8)
 
     # Run simulation
     print('### Start simulation ###\n')

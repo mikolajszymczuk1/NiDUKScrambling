@@ -4,11 +4,12 @@ from typing import Generator
 from ..PipelineBlockElement.PipelineBlock import PipelineBlock
 from ..DescramblerElement.Descrambler import Descrambler
 from enums.EnumBitState import EnumBitState
+from conf.toggle_modules_conf import JAMMER_MODULE
 
 class SignalJammer(PipelineBlock):
     # Run env process
     def run_process(self) -> Generator[Process, None, None]:
-        data_after_jamming = self.jamming_channel()
+        data_after_jamming = self.jamming_channel() if JAMMER_MODULE else self.data
         print(f'Passing the signal through the interfering channel:\n - {self.data} --> {data_after_jamming}')
         descrambler = Descrambler(self.env, data_after_jamming)
         yield self.env.process(descrambler.run_process())

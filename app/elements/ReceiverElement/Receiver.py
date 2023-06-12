@@ -7,5 +7,5 @@ class Receiver(PipelineBlock):
 
     # Run env process
     def run_process(self) -> Generator[Timeout, None, None]:
-        print(f'Receive data:\n - {self.data}')
+        print(f'Receive data:\n - {self.data} --> Save bits to file\n')
         yield self.env.timeout(self.PROP_DELAY)

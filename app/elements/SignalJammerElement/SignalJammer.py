@@ -7,12 +7,13 @@ from enums.EnumBitState import EnumBitState
 class SignalJammer(PipelineBlock):
     # Run env process
     def run_process(self) -> Generator[Process, None, None]:
-        print(f'Passing the signal through the interfering channel:\n - {self.data}')
-        descrambler = Descrambler(self.env, self.jamming_channel())
+        data_after_jamming = self.jamming_channel()
+        print(f'Passing the signal through the interfering channel:\n - {self.data} --> {data_after_jamming}')
+        descrambler = Descrambler(self.env, data_after_jamming)
         yield self.env.process(descrambler.run_process())
 
     def jamming_channel(self) -> list[int]:
-        """  """
+        """ Signal interference based on a sequence of the same bits """
 
         sets_of_bits = []
         for bit in self.data:

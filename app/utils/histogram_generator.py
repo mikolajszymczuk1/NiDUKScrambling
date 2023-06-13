@@ -13,9 +13,9 @@ def create_histogram(data: list[int], title: str, output_image_location: str) ->
     fig, ax = plt.subplots(figsize=(16, 9))
 
     # Setup variables
-    current_bit = data[0]
-    current_count = 1
-    counts = []
+    current_bit: int = data[0]
+    current_count: int = 1
+    counts: list[tuple[int, int]] = []
 
     # Iterate through signal
     for bit in data[1:]:
@@ -29,9 +29,9 @@ def create_histogram(data: list[int], title: str, output_image_location: str) ->
     counts.append((current_bit, current_count))
 
     # Prepare histogram data
-    x = range(len(counts))
-    y = [count[1] for count in counts]
-    labels = [f"{count[0]}" for count in counts]
+    x: range = range(len(counts))
+    y: list[int] = [count[1] for count in counts]
+    labels: list[str] = [f"{count[0]}" for count in counts]
 
     # Setup histogrm
     ax.bar(x, y)
@@ -49,6 +49,6 @@ def load_signal_from_file(file_location: str) -> list[int]:
     """ Load string signal from file and convert it to list of bits """
 
     with open(file_location, 'r') as file:
-        signal_string = file.readline()
-        signal_converted = [int(bit) for bit in signal_string]
+        signal_string: str = file.readline()
+        signal_converted: list[int] = [int(bit) for bit in signal_string]
         return signal_converted

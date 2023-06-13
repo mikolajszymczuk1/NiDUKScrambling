@@ -5,9 +5,9 @@ from utils.histogram_generator import create_histogram, load_signal_from_file
 from conf.output_conf import OUTPUT_DIR, OUTPUT_FILE, OUTPUT_SCRAMBLER_FILE, HISTOGRAM_INPUT_FILE, HISTOGRAM_SCRAMBLER_FILE, HISTOGRAM_OUTPUT_FILE
 from conf.simulation_conf import BITS_IN_ONE_TIME
 
-def main():
+def main() -> None:
     # Input signal
-    SIGNAL = [0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+    SIGNAL: list[int] = [0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
 
     # Create output directory if does not exist
     if not os.path.exists(OUTPUT_DIR): os.makedirs(OUTPUT_DIR)
@@ -28,8 +28,8 @@ def main():
     print('\n### End simulation ###')
 
     # Generate histograms
-    signal_out = load_signal_from_file(OUTPUT_FILE)
-    scrambler_out = load_signal_from_file(OUTPUT_SCRAMBLER_FILE)
+    signal_out: list[int] = load_signal_from_file(OUTPUT_FILE)
+    scrambler_out: list[int] = load_signal_from_file(OUTPUT_SCRAMBLER_FILE)
     create_histogram(SIGNAL, 'Histogram for input signal', HISTOGRAM_INPUT_FILE)
     create_histogram(scrambler_out, 'Histogram for scrambler output', HISTOGRAM_SCRAMBLER_FILE)
     create_histogram(signal_out, 'Histogram for output signal', HISTOGRAM_OUTPUT_FILE)

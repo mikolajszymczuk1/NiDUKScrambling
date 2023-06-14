@@ -15,32 +15,38 @@ def create_histogram(data: list[int], title: str, output_image_location: str) ->
     # Setup variables
     current_bit: int = data[0]
     current_count: int = 1
-    counts: list[tuple[int, int]] = []
+    counts: dict[int, int] = {}
 
     # Iterate through signal
     for bit in data[1:]:
         if bit == current_bit:
             current_count += 1
         else:
-            counts.append((current_bit, current_count))
+            if current_count in counts:
+                counts[current_count] += 1
+            else:
+                counts[current_count] = 1
             current_bit = bit
             current_count = 1
 
-    counts.append((current_bit, current_count))
+    if current_count in counts:
+        counts[current_count] += 1
+    else:
+        counts[current_count] = 1
 
     # Prepare histogram data
-    x: range = range(len(counts))
-    y: list[int] = [count[1] for count in counts]
-    labels: list[str] = [f"{count[0]}" for count in counts]
+    x: range = range(1, max(counts.keys()) + 1)
+    y: list[int] = [counts[i] if i in counts else 0 for i in x]
+    labels: list[str] = [str(i) for i in x]
 
-    # Setup histogrm
+    # Setup histogram
     ax.bar(x, y)
     ax.set_title(title)
-    ax.set_xlabel('String index')
-    ax.set_ylabel('String length')
+    ax.set_xlabel('String length')
+    ax.set_ylabel('String count')
     ax.set_xticks(x)
     ax.set_xticklabels(labels)
-    ax.set_yticks(range(min(y), max(y) + 1))
+    ax.set_yticks(range(max(y) + 1))
     plt.savefig(output_image_location)
     plt.close(fig)
 

@@ -15,7 +15,7 @@ class Transmitter(PipelineBlock):
 
         while len(self.data) > 0:
             bits: list[int] = self.data[:self.bits_to_read]
-            self.data = self.data[self.bits_to_read:]
+            self.data: list[int] = self.data[self.bits_to_read:]
             print(f'Send bits:\n - {bits}')
             scrambler = Scrambler(self.env, bits)
             yield self.env.process(scrambler.run_process())

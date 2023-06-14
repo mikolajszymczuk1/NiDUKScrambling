@@ -5,5 +5,8 @@ trim_trailing_whitespace = true
 indent_style = space
 end_of_line = lf
 
+[*.txt]
+insert_final_newline = false
+
 [*.py]
 indent_size = 4

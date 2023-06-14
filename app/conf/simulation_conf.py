@@ -1,1 +1,1 @@
-BITS_IN_ONE_TIME: int = 16
+BITS_IN_ONE_TIME: int = 8

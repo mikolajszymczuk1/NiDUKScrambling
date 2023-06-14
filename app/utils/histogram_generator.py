@@ -46,7 +46,7 @@ def create_histogram(data: list[int], title: str, output_image_location: str) ->
     ax.set_ylabel('String count')
     ax.set_xticks(x)
     ax.set_xticklabels(labels)
-    ax.set_yticks(range(max(y) + 1))
+    ax.set_yticks(range(0, max(y) + 1, 5))
     plt.savefig(output_image_location)
     plt.close(fig)
 

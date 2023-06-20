@@ -4,8 +4,8 @@ class TestSignalUtils:
     def test_error_bit_rate(self) -> None:
         # GIVEN
         test_inputs: list[tuple[list[int], list[int], int]] = [
-            ([1, 1, 1, 1, 1], [1, 1, 1, 1, 1], 100),
-            ([1, 1, 1, 1, 1], [1, 1, 0, 0, 1], 60)
+            ([1, 1, 1, 1, 1], [1, 1, 1, 1, 1], 0),
+            ([1, 1, 1, 1, 1], [1, 1, 0, 0, 1], 40)
         ]
 
         # WHEN

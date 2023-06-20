@@ -6,6 +6,9 @@ matplotlib.use('TkAgg')
 def create_histogram(data: list[int], title: str, output_image_location: str) -> None:
     """ Generate histogram that shows strings of bits """
 
+    X_VALUES_STEP = 5
+    Y_VALUES_STEP = 5
+
     # Set theme on histogram
     sns.set_theme(style="darkgrid")
 
@@ -44,9 +47,9 @@ def create_histogram(data: list[int], title: str, output_image_location: str) ->
     ax.set_title(title)
     ax.set_xlabel('String length')
     ax.set_ylabel('String count')
-    ax.set_xticks(x)
-    ax.set_xticklabels(labels)
-    ax.set_yticks(range(0, max(y) + 1, 5))
+    ax.set_xticks(range(1, max(x) + 1, X_VALUES_STEP))
+    ax.set_xticklabels(labels[::X_VALUES_STEP])
+    ax.set_yticks(range(0, max(y) + 1, Y_VALUES_STEP))
     plt.savefig(output_image_location)
     plt.close(fig)
 
